@@ -151,6 +151,19 @@ namespace CKPLLauncher
             }
         }
 
+        private void gamesList_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Color color = Color.CornflowerBlue;
+            if (e.Index < 0) return;
+            //if the item state is selected them change the back color 
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                e = new DrawItemEventArgs(e.Graphics, e.Font, e.Bounds, e.Index, e.State ^ DrawItemState.Selected, e.ForeColor, color);
+            
+            e.DrawBackground();
+            e.Graphics.DrawString(gamesList.Items[e.Index].ToString(), e.Font, Brushes.Black, e.Bounds, StringFormat.GenericDefault);
+            e.DrawFocusRectangle();
+        }
+
         private void sourceCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string target = FileSize.xmlData(gameName.Text, "/app/SourceCode", true);
@@ -193,7 +206,8 @@ namespace CKPLLauncher
 
         private void startDownload(string link, string destination)
         {
-            Thread thread = new Thread(() => {
+            Thread thread = new Thread(() => 
+            {
                 WebClient client = new WebClient();
                 client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
@@ -205,7 +219,9 @@ namespace CKPLLauncher
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             this.BeginInvoke((MethodInvoker)delegate {
-                downloadLabel.Text = "Downloaded " + FileSize.FormatBytes(e.BytesReceived) + " of " + FileSize.FormatBytes(e.TotalBytesToReceive);
+                string downloaded = FileSize.FormatBytes(e.BytesReceived);
+                string toDownload = FileSize.FormatBytes(e.TotalBytesToReceive);
+                downloadLabel.Text = "Downloaded " + downloaded + " of " + toDownload;
                 downloadProgress.Value = int.Parse(e.ProgressPercentage.ToString());
             });
         }

@@ -1,4 +1,6 @@
-﻿namespace CKPLLauncher
+﻿using System.Windows.Forms;
+
+namespace CKPLLauncher
 {
     partial class CKPLLauncher
     {
@@ -41,7 +43,7 @@
             this.projectFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.desc = new System.Windows.Forms.Label();
-            this.downloadProgress = new System.Windows.Forms.ProgressBar();
+            this.downloadProgress = new CustomProgressBar();
             this.launchWarning = new System.Windows.Forms.Label();
             this.Settings = new System.Windows.Forms.Button();
             this.gameImage = new System.Windows.Forms.PictureBox();
@@ -62,6 +64,8 @@
             this.gamesList.Name = "gamesList";
             this.gamesList.Size = new System.Drawing.Size(242, 550);
             this.gamesList.TabIndex = 0;
+            this.gamesList.DrawMode = DrawMode.OwnerDrawFixed;
+            this.gamesList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.gamesList_DrawItem);
             this.gamesList.SelectedIndexChanged += new System.EventHandler(this.gamesList_SelectedIndexChanged);
             // 
             // SearchBar
@@ -129,7 +133,7 @@
             // 
             // launchGame
             // 
-            this.launchGame.BackColor = System.Drawing.Color.RoyalBlue;
+            this.launchGame.BackColor = System.Drawing.Color.CornflowerBlue;
             this.launchGame.FlatAppearance.BorderSize = 0;
             this.launchGame.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.launchGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -202,7 +206,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.downloadProgress.Location = new System.Drawing.Point(248, 526);
             this.downloadProgress.Name = "downloadProgress";
-            this.downloadProgress.Size = new System.Drawing.Size(924, 23);
+            this.downloadProgress.Size = new System.Drawing.Size(924, 30);
+            this.downloadProgress.Step = 1;
             this.downloadProgress.TabIndex = 12;
             // 
             // launchWarning
@@ -217,7 +222,7 @@
             // 
             // Settings
             // 
-            this.Settings.BackColor = System.Drawing.Color.RoyalBlue;
+            this.Settings.BackColor = System.Drawing.Color.CornflowerBlue;
             this.Settings.BackgroundImage = global::CKPLLauncher.Properties.Resources.Settings;
             this.Settings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Settings.FlatAppearance.BorderSize = 0;
@@ -243,11 +248,12 @@
             // downloadLabel
             // 
             this.downloadLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.downloadLabel.Location = new System.Drawing.Point(679, 507);
+            this.downloadLabel.Location = new System.Drawing.Point(249, 500);
             this.downloadLabel.Name = "downloadLabel";
-            this.downloadLabel.Size = new System.Drawing.Size(60, 13);
+            this.downloadLabel.Size = new System.Drawing.Size(923, 20);
             this.downloadLabel.TabIndex = 13;
             this.downloadLabel.Text = "Downloads";
+            this.downloadLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CKPLLauncher
             // 
