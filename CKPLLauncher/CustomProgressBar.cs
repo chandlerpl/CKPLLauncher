@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,7 +10,6 @@ namespace CKPLLauncher
 {
     class CustomProgressBar : ProgressBar
     {
-        [Description("Test text displayed in the textbox"), Category("Data")]
         public Brush brush = Brushes.CornflowerBlue;
 
         public CustomProgressBar()

@@ -97,6 +97,8 @@
     <None Include="Resources\Settings.png" />
     <None Include="bin\Debug\download.png" />
     <None Include="bin\Debug\gear-outline.png" />
+    <None Include="Resources\Background.png" />
+    <None Include="Resources\Background.bmp" />
     <Content Include="Resources\NotAvailable.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

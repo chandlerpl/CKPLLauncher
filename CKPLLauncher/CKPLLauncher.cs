@@ -17,6 +17,7 @@ namespace CKPLLauncher
     public partial class CKPLLauncher : Form
     {
         SQLConnection sql;
+        SettingsForm sf;
 
         public CKPLLauncher()
         {
@@ -256,9 +257,49 @@ namespace CKPLLauncher
 
         private void Settings_Click(object sender, EventArgs e)
         {
-            SettingsForm sf = new SettingsForm();
-            sf.Text = gameName.Text + " Properties";
-            sf.Show();
+            if(sf != null && sf.Visible)
+            {
+                if(sf.Text != gameName.Text + " Properties")
+                {
+                    sf.Close();
+                    sf.Dispose();
+                    sf = new SettingsForm();
+                    sf.Text = gameName.Text + " Properties";
+                    sf.Show();
+                }
+                else
+                {
+                    sf.Activate();
+                }
+            }
+            else
+            {
+                sf = new SettingsForm();
+                sf.Text = gameName.Text + " Properties";
+                sf.Show();
+            }
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void maximiseButton_Click(object sender, EventArgs e)
+        {
+            if(this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void minimiseButton_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }
