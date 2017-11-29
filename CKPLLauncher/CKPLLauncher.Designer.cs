@@ -1,7 +1,29 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace CKPLLauncher
 {
+    class CustomProgressBar : ProgressBar
+    {
+        public Brush brush = Brushes.CornflowerBlue;
+
+        public CustomProgressBar()
+        {
+            this.SetStyle(ControlStyles.UserPaint, true);
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Rectangle rec = e.ClipRectangle;
+
+            rec.Width = (int)(rec.Width * ((double)Value / Maximum)) - 4;
+            if (ProgressBarRenderer.IsSupported)
+                ProgressBarRenderer.DrawHorizontalBar(e.Graphics, e.ClipRectangle);
+            rec.Height = rec.Height - 4;
+            e.Graphics.FillRectangle(brush, 2, 2, rec.Width, rec.Height);
+        }
+    }
+
     partial class CKPLLauncher
     {
         /// <summary>
@@ -28,6 +50,7 @@ namespace CKPLLauncher
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        /// 
         private void InitializeComponent()
         {
             this.gamesList = new System.Windows.Forms.ListBox();
@@ -50,7 +73,7 @@ namespace CKPLLauncher
             this.minimiseButton = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.Button();
             this.gameImage = new System.Windows.Forms.PictureBox();
-            this.downloadProgress = new CustomProgressBar();
+            this.downloadProgress = new System.Windows.Forms.ProgressBar();
             this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gameImage)).BeginInit();
@@ -384,7 +407,7 @@ namespace CKPLLauncher
         private Button closeButton;
         private Button maximiseButton;
         private Button minimiseButton;
-        private CustomProgressBar downloadProgress;
+        private ProgressBar downloadProgress;
         private Label label4;
     }
 }

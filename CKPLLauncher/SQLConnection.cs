@@ -24,6 +24,18 @@ namespace CKPLLauncher
             }
         }
 
+        public Boolean isOpen()
+        {
+            if(myConnection.State == System.Data.ConnectionState.Closed || myConnection.State == System.Data.ConnectionState.Broken)
+            {
+                return false;
+            } 
+            else
+            {
+                return true;
+            }
+        }
+
         public void sqlClose()
         {
             try

@@ -118,14 +118,17 @@ namespace CKPLLauncher
             sql = new SQLConnection();
             sql.sqlOpen();
 
-            List<String> list = sql.sqlSelect("Name", "gamesList", "");
-
-            foreach (string item in list)
+            if(sql.isOpen())
             {
-                gamesList.Items.Add(item);
-                sql.sqlDownload(Application.StartupPath + "\\temp\\", item, "gamesList");
+                List<String> list = sql.sqlSelect("Name", "gamesList", "");
+
+                foreach (string item in list)
+                {
+                    gamesList.Items.Add(item);
+                    sql.sqlDownload(Application.StartupPath + "\\temp\\", item, "gamesList");
+                }
+                gamesList.SelectedIndex = 0;
             }
-            gamesList.SelectedIndex = 0;
         }
 
         private void CKPLLauncher_Closed(object sender, EventArgs e)

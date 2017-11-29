@@ -52,9 +52,6 @@
     <Compile Include="CKPLLauncher.Designer.cs">
       <DependentUpon>CKPLLauncher.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomProgressBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="FileSize.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
